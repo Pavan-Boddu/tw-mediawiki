@@ -23,8 +23,8 @@ git clone https://github.com/Pavan-Boddu/tw-mediawiki.git
 cd tw-mediawiki/terraform
 ```
 2. Update the `terraform.tfvars` with appropriate values
-3. Update the credentials.json with corresponding service account json key value.
-4. Copy the private key value of `~/.ssh/id_rsa` file or corresponding private key value to `credentials.json` to ssh to the cloud instance.
+3. Update the `credentials.json` with corresponding service account json key value.
+4. Copy the private key value of `~/.ssh/id_rsa` file or corresponding private key value to `ssh_key` to ssh to the cloud instance.
 5. Apply the terraform using below commands
 ```sh
 terraform init
