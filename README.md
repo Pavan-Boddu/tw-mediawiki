@@ -31,4 +31,4 @@ terraform init
 terraform plan
 terraform apply
 ```
-6. On a successfull execution, the terminal output contains the external IP and the Mediawiki application can be accessed at `http://<External_IP>:30007`. The database details like root credentials and database name can be found under `tw-mediawiki/kubernetes/helm/tw-mediawiki/values.yaml`
+6. On a successfull execution, the terminal output contains the external IP and the Mediawiki application can be accessed at `http://<External_IP>:30007`. The database details like root credentials and database name can be found under `tw-mediawiki/kubernetes/helm/tw-mediawiki/values.yaml`. Mariadb url will be `<External_IP>:30306`, dbname `mediawiki`, db-root-user `root`, db-root-password `P@ssw0rdRoot`, db-user `mediawiki_user` and db-password `P@ssw123rd`.
