@@ -1,6 +1,8 @@
 # Mediawiki on Kubernetes
 This automation provisions a kubernetes cluster and deployes the Mediawiki applicaiton along with Mariadb.
 
+![architecture/flow](https://github.com/Pavan-Boddu/tw-mediawiki/blob/master/flow.png)
+
 ## Setup Instructions
 Follow the below set of instructions to setup Mediawiki application.
 
