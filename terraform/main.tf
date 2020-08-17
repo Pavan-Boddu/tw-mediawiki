@@ -88,4 +88,6 @@ resource "google_compute_instance" "mediawiki" {
     ]
   }
 
+  depends_on = ["google_container_cluster.mediawiki"]
+
 }
