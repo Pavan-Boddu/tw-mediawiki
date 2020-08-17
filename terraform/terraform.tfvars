@@ -1,0 +1,9 @@
+region = "<region>"
+project = "<gcp_project_id>"
+name="tw-mediawiki"
+zone="<zone>"
+node_count=1
+machinetype="n1-standard-4"
+image="centos-7-v20200811"
+port="30007"
+ssh_user="<ssh_user_name>"

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mariadb.name }}
+  namespace: {{ .Values.namespace.name }}
+  labels: 
+    app: {{ include "tw-mediawiki.name" . }}-db
+    type: {{ .Values.mariadb.type }}
+spec:
+  replicas: {{ .Values.mariadb.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "tw-mediawiki.name" . }}-db
+      type: {{ .Values.mariadb.type }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "tw-mediawiki.name" . }}-db
+        type: {{ .Values.mariadb.type }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.mariadb.image }}
+          imagePullPolicy: {{ .Values.mariadb.imagePullPolicy }}
+          ports:
+            - name: db-port
+              containerPort: {{ .Values.mariadb.port }}
+          env:
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mariadbSecret.name }}
+                  key: dbuser
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mariadbSecret.name }}
+                  key: dbname
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mariadbSecret.name }}
+                  key: dbpassword
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mariadbSecret.name }}
+                  key: dbrootpassword
+          volumeMounts:
+          - name: {{ .Values.mariadb.name }}-persistent-storage
+            mountPath: /var/lib/mysql
+      volumes:
+      - name: {{ .Values.mariadb.name }}-persistent-storage
+        persistentVolumeClaim:
+          claimName: {{ .Values.mariadb.name }}-pvc

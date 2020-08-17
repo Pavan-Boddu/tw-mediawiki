@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tw-mediawiki.name" . }}-app
+  namespace: {{ .Values.namespace.name }}
+  labels: 
+    app: {{ include "tw-mediawiki.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "tw-mediawiki.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "tw-mediawiki.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            initialDelaySeconds: 10
+            failureThreshold: 10
+            periodSeconds: 30
+            httpGet:
+              path: /
+              port: http

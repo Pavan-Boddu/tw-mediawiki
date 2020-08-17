@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tw-mediawiki.name" . }}-service
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    app: {{ include "tw-mediawiki.name" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      nodePort: {{ .Values.service.nodePort }}
+  selector:
+    app: {{ include "tw-mediawiki.name" . }}

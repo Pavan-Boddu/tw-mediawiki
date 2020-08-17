@@ -1,0 +1,9 @@
+variable "region" {}
+variable "project" {}
+variable "name" {}
+variable "node_count" {}
+variable "machinetype" {}
+variable "zone" {}
+variable "image" {}
+variable "port" {}
+variable "ssh_user" {}

@@ -1,0 +1,50 @@
+# Default values for tw-mediawiki.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: pavanboddu/tw-mediawiki
+  tag: latest
+  pullPolicy: IfNotPresent
+
+mariadb:
+  name: mariadb
+  type: database
+  replicaCount: 1
+  port: 3306
+  nodePort: 30306
+  serviceType: NodePort
+  image: mariadb
+  imagePullPolicy: IfNotPresent
+
+mariadbSecret:
+  name: mariadb-secret
+  dbuser: bWVkaWF3aWtpX3VzZXI=
+  dbname: bWVkaWF3aWtp
+  dbpassword: UEBzc3cxMjNyZA==
+  dbrootpassword: UEBzc3cwcmRSb290
+
+namespace:
+  name: mediawiki
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30007
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
