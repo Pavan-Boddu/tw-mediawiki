@@ -23,12 +23,12 @@ git clone https://github.com/Pavan-Boddu/tw-mediawiki.git
 cd tw-mediawiki/terraform
 ```
 2. Update the `terraform.tfvars` with appropriate values
-3. Update the credentials.json with corresponding service account json key value.
-4. Copy the private key value of `~/.ssh/id_rsa` file or corresponding private key value to `credentials.json` to ssh to the cloud instance.
+3. Update the `credentials.json` with corresponding service account json key value.
+4. Copy the private key value of `~/.ssh/id_rsa` file or corresponding private key value to `ssh_key` to ssh to the cloud instance.
 5. Apply the terraform using below commands
 ```sh
 terraform init
 terraform plan
 terraform apply
 ```
-6. On a successfull execution, the terminal output contains the external IP and the Mediawiki application can be accessed at `http://<External_IP>:30007`. The database details like root credentials and database name can be found under `tw-mediawiki/kubernetes/helm/tw-mediawiki/values.yaml`
+6. On a successfull execution, the terminal output contains the external IP and the Mediawiki application can be accessed at `http://<External_IP>:30007`. The database details like root credentials and database name can be found under `tw-mediawiki/kubernetes/helm/tw-mediawiki/values.yaml`. Mariadb url will be `<External_IP>:30306`, dbname `mediawiki`, db-root-user `root`, db-root-password `P@ssw0rdRoot`, db-user `mediawiki_user` and db-password `P@ssw123rd`.
